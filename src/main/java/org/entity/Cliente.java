@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.repository.CrudRepositorie;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,13 @@ public class Cliente {
     @Column(name="cuit")
     private String cuit;
 
-    public Cliente(String razonSocial, String cuit) {
+    @OneToMany(mappedBy = "cliente")
+    private Set<Incidente> incidentes;
+
+    public Cliente(String razonSocial, String cuit, Set<Incidente> incidentes) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
+        this.incidentes = incidentes;
     }
 
 }

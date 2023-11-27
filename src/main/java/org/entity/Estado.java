@@ -1,5 +1,7 @@
 package org.entity;
 
 public enum Estado {
-    INCOMPLETO,FINALIZADO,EN_PROGRESO;
+    ESTADO_PENDIENTE,
+    ESTADO_CERRADO,
+    ESTADO_PROCESO;
 }

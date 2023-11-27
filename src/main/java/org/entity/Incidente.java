@@ -3,10 +3,7 @@ package org.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -23,12 +20,17 @@ public class Incidente {
     private String consideration;
     private Estado state;
 
-    public Incidente(String title, LocalDate date, LocalDate dateEstimate, LocalDate dateResolution, String consideration, Estado state) {
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    public Incidente(String title, LocalDate date, LocalDate dateEstimate, LocalDate dateResolution, String consideration, Estado state, Cliente cliente) {
         this.title = title;
         this.date = date;
         this.dateEstimate = dateEstimate;
         this.dateResolution = dateResolution;
         this.consideration = consideration;
         this.state = state;
+        this.cliente = cliente;
     }
 }
