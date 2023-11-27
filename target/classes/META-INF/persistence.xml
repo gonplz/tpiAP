@@ -20,6 +20,12 @@
 
       <!-- Configuración del dialecto de la base de datos -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+
+<!--      &lt;!&ndash; Muestra por debajo lo que esta pasando &ndash;&gt;-->
+<!--      <property name="hibernate.format_sql" value="true" />-->
+<!--      <property name="hibernate.highlight_sql" value="true" />-->
+
+
     </properties>
   </persistence-unit>
 </persistence>

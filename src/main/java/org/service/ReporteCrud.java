@@ -7,19 +7,13 @@ public class ReporteCrud implements CrudRepositorie<Reporte> {
 
 
     @Override
-    public void create(Reporte reporte) {
-
-    }
+    public void create(Reporte reporte) {}
 
     @Override
-    public void update(Reporte reporte) {
-
-    }
+    public void update(Reporte reporte) {}
 
     @Override
-    public void delate(Reporte reporte) {
-
-    }
+    public void delate(Reporte reporte) {}
 
     @Override
     public Reporte retrive(int id) {

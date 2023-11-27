@@ -33,7 +33,7 @@ public class Main {
         incidente.setDateResolution(LocalDate.now());
         incidente.setConsideration("XXXXXXX");
         incidente.setTitle("Servicio");
-        incidente.setState(Estado.ESTADO_CERRADO);
+        incidente.setState(Estado.ESTADO_PROCESO);
 
         try {
             // Iniciar la transacción

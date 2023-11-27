@@ -5,19 +5,13 @@ import org.repository.CrudRepositorie;
 
 public class TecnicoCrud implements CrudRepositorie<Tecnico> {
     @Override
-    public void create(Tecnico tecnico) {
-
-    }
+    public void create(Tecnico tecnico) {}
 
     @Override
-    public void update(Tecnico tecnico) {
-
-    }
+    public void update(Tecnico tecnico) {}
 
     @Override
-    public void delate(Tecnico tecnico) {
-
-    }
+    public void delate(Tecnico tecnico) {}
 
     @Override
     public Tecnico retrive(int id) {

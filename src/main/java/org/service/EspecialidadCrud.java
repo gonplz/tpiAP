@@ -6,19 +6,13 @@ import org.repository.CrudRepositorie;
 public class EspecialidadCrud implements CrudRepositorie<Especialidad> {
 
     @Override
-    public void create(Especialidad especialidad) {
-
-    }
+    public void create(Especialidad especialidad) {}
 
     @Override
-    public void update(Especialidad especialidad) {
-
-    }
+    public void update(Especialidad especialidad) {}
 
     @Override
-    public void delate(Especialidad especialidad) {
-
-    }
+    public void delate(Especialidad especialidad) {}
 
     @Override
     public Especialidad retrive(int id) {

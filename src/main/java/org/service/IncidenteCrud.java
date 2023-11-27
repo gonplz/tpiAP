@@ -6,19 +6,13 @@ import org.repository.CrudRepositorie;
 public class IncidenteCrud implements CrudRepositorie<Incidente> {
 
     @Override
-    public void create(Incidente incidente) {
-
-    }
+    public void create(Incidente incidente) {}
 
     @Override
-    public void update(Incidente incidente) {
-
-    }
+    public void update(Incidente incidente) {}
 
     @Override
-    public void delate(Incidente incidente) {
-
-    }
+    public void delate(Incidente incidente) {}
 
     @Override
     public Incidente retrive(int id) {

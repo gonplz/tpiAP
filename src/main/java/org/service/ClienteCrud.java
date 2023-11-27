@@ -7,19 +7,13 @@ public class ClienteCrud implements CrudRepositorie<Cliente> {
 
 
     @Override
-    public void create(Cliente cliente) {
-
-    }
+    public void create(Cliente cliente) {}
 
     @Override
-    public void update(Cliente cliente) {
-
-    }
+    public void update(Cliente cliente) {}
 
     @Override
-    public void delate(Cliente cliente) {
-
-    }
+    public void delate(Cliente cliente) {}
 
     @Override
     public Cliente retrive(int id) {
