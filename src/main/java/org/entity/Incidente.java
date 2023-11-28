@@ -14,21 +14,26 @@ public class Incidente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private LocalDate date;
+    private LocalDate dateStart;
     private LocalDate dateEstimate;
-    private LocalDate dateResolution;
+    private LocalDate dateEnd;
     private String consideration;
+    @Column(name = "estado")
     private Estado state;
-
+    private int [] complejidad={1,2,3}; // normal media alta
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    public Incidente(String title, LocalDate date, LocalDate dateEstimate, LocalDate dateResolution, String consideration, Estado state, Cliente cliente) {
+    //@OneToMany
+    private Tecnico tecnico;
+
+
+    public Incidente(String title, LocalDate dateStart, LocalDate dateEstimate, LocalDate dateEnd, String consideration, Estado state, Cliente cliente) {
         this.title = title;
-        this.date = date;
+        this.dateStart = dateStart;
         this.dateEstimate = dateEstimate;
-        this.dateResolution = dateResolution;
+        this.dateEnd = dateEnd;
         this.consideration = consideration;
         this.state = state;
         this.cliente = cliente;

@@ -4,7 +4,7 @@ import org.entity.Tecnico;
 
 import java.time.LocalDate;
 
-public interface TecnicoRepositorie {
+public interface TecnicoRepositorie extends CrudRepositorie<Tecnico> {
 
  Tecnico NumeroDeDias(LocalDate inicio, LocalDate fin); // este metodo resuelve, quien fue le tecnico con mas incidentes resueltos en los ultimos N dias//
     Tecnico NumeroDeEspecial(LocalDate inicio, LocalDate fin); // este metodo resuelve, quien fue le tecnico con mas incidentes resueltos por especialidad//

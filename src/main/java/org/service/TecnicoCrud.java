@@ -2,8 +2,11 @@ package org.service;
 
 import org.entity.Tecnico;
 import org.repository.CrudRepositorie;
+import org.repository.TecnicoRepositorie;
 
-public class TecnicoCrud implements CrudRepositorie<Tecnico> {
+import java.time.LocalDate;
+
+public class TecnicoCrud implements TecnicoRepositorie {
     @Override
     public void create(Tecnico tecnico) {}
 
@@ -20,6 +23,26 @@ public class TecnicoCrud implements CrudRepositorie<Tecnico> {
 
     @Override
     public Tecnico retriveAll() {
+        return null;
+    }
+
+    @Override
+    public Tecnico NumeroDeDias(LocalDate inicio, LocalDate fin) {
+        return null;
+    }
+
+    @Override
+    public Tecnico NumeroDeEspecial(LocalDate inicio, LocalDate fin) {
+        return null;
+    }
+
+    @Override
+    public Tecnico NumeroDeIncidentes(LocalDate inicio, LocalDate fin) {
+        return null;
+    }
+
+    @Override
+    public Tecnico tecnicoMasRapido(LocalDate inicio, LocalDate fin) {
         return null;
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class Main {
 
@@ -28,9 +29,9 @@ public class Main {
 
         Incidente incidente = new Incidente();
         incidente.setCliente(cliente);
-        incidente.setDate(LocalDate.now());
+        incidente.setDateStart(LocalDate.now());
         incidente.setDateEstimate(LocalDate.now());
-        incidente.setDateResolution(LocalDate.now());
+        incidente.setDateEnd(LocalDate.now());
         incidente.setConsideration("XXXXXXX");
         incidente.setTitle("Servicio");
         incidente.setState(Estado.ESTADO_PROCESO);
@@ -53,6 +54,36 @@ public class Main {
             em.close();
             emf.close();
         }
+    }
+    public static void menu(){
+        int opc=5;
+        Scanner sc=new Scanner(System.in);
+
+        do{
+
+            System.out.println("Menu");
+            System.out.println("Mesa ayuda");
+            System.out.println("RRHHH");
+            System.out.println("Area administrativa");
+            System.out.println("5-Salir");
+
+            switch (opc){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+
+
+            }
+
+        }while (opc!=5);
+
     }
 
 }
