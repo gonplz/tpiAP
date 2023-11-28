@@ -15,9 +15,17 @@ public class Main {
 
         // Crear un nuevo cliente, incidente y tecnico
         Cliente cliente = new Cliente();
-        cliente.setRazonSocial("Dani");
-        cliente.setCuit("2200");
+        cliente.setRazonSocial("Fran");
+        cliente.setCuit("2201");
         cliente.setIncidentes(new HashSet<>());
+
+        Tecnico tecnico = new Tecnico();
+        tecnico.setFirstname("Vero");
+        tecnico.setLastname("Galvi");
+        tecnico.setDni(2026);
+        tecnico.setEspecialidad(Especialidad.SAP);
+        tecnico.setMedio(Noti.WHATSAPP);
+        tecnico.setProblema(new HashSet<>());
 
         Incidente incidente = new Incidente();
         incidente.setCliente(cliente);
@@ -25,24 +33,16 @@ public class Main {
         incidente.setDateEstimate(LocalDate.now());
         incidente.setDateEnd(LocalDate.now());
         incidente.setConsideration("XXXXXXX");
-        incidente.setTitle("Servicio");
+        incidente.setTitle("Mantenimiento");
         incidente.setState(Estado.ESTADO_PROCESO);
-
-        Tecnico tecnico = Tecnico.builder()
-
-                .firstname("Vero")
-                .lastname("Galvi")
-                .dni(2026)
-                .especialidad(Especialidad.SAP)
-                .medio(Noti.WHATSAPP)
-                .build();
-
         incidente.setTecnico(tecnico);
+
+
 //        tecnico.addIncidentes(incidente);
 
         insert(cliente);
-        insert(incidente);
         insert(tecnico);
+        insert(incidente);
 
     }
     public static void insert(Object object){

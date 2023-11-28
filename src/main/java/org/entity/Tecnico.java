@@ -25,22 +25,13 @@ public class Tecnico {
     @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
      private Set<Incidente> problema = new HashSet<>();
 
-
-    @Builder
-    public Tecnico(String firstname, String lastname, int dni, Especialidad especialidad ,Noti medio) {
+    public Tecnico(String firstname,String lastname,int dni,Especialidad especialidad,Noti medio,Set<Incidente>problema) {
 
         this.firstname = firstname;
         this.lastname = lastname;
         this.dni = dni;
         this.especialidad = especialidad;
         this.medio = medio;
-    }
-
-    public Set<Incidente> getProblema() {
-        return problema;
-    }
-
-    public void setProblema(Set<Incidente> problema) {
         this.problema = problema;
     }
 
