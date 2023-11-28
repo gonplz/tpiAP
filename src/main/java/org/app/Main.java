@@ -37,9 +37,6 @@ public class Main {
         incidente.setState(Estado.ESTADO_PROCESO);
         incidente.setTecnico(tecnico);
 
-
-//        tecnico.addIncidentes(incidente);
-
         insert(cliente);
         insert(tecnico);
         insert(incidente);

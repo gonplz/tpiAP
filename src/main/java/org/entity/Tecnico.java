@@ -32,11 +32,8 @@ public class Tecnico {
         this.dni = dni;
         this.especialidad = especialidad;
         this.medio = medio;
-        this.problema = problema;
+        this.problema = new HashSet<>();
     }
 
-    //Metodo add//
-    public void addIncidentes (Incidente incidente) {
-        problema.add(incidente);
-    }
 }
+
