@@ -1,8 +1,6 @@
 package org.app;
 
-import org.entity.Cliente;
-import org.entity.Estado;
-import org.entity.Incidente;
+import org.entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +19,7 @@ public class Main {
         EntityManager em = emf.createEntityManager();
 
 
-        // Crear un nuevo cliente
+        // Crear un nuevo cliente, incidente y tecnico
         Cliente cliente = new Cliente();
         cliente.setRazonSocial("Gonza");
         cliente.setCuit("2023");
@@ -35,6 +33,9 @@ public class Main {
         incidente.setConsideration("XXXXXXX");
         incidente.setTitle("Servicio");
         incidente.setState(Estado.ESTADO_PROCESO);
+
+        Tecnico tecnico = new Tecnico("Fran", "Bara",2025, Noti.EMAIL);
+        tecnico.addIncidentes(incidente);
 
         try {
             // Iniciar la transacción

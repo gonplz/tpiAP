@@ -4,7 +4,9 @@ import lombok.NoArgsConstructor;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,9 +19,12 @@ public class Tecnico {
     private String firstname;
     private String lastname;
     private int dni;
-    List<Especialidad>especialidades;
-    private List<Incidente> incidentes;
+
+    private Especialidad especialidad;
     private Noti medio;
+
+    @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
+     private Set<Incidente> incidentes = new HashSet<>();
 
     public Tecnico(String firstname, String lastname, int dni, Noti medio) {
 
@@ -28,4 +33,11 @@ public class Tecnico {
         this.dni = dni;
         this.medio = medio;
     }
+
+    //Metodo add//
+    public void addIncidentes (Incidente incidente) {
+        incidente.setTecnico(this);
+        incidentes.add(incidente);
+    }
+
 }

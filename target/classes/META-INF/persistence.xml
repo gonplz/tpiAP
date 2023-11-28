@@ -12,18 +12,15 @@
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/prueba?serverTimezone=UTC" />
       <property name="javax.persistence.jdbc.user" value="root" />
-      <property name="javax.persistence.jdbc.password" value="admin" />
+      <property name="javax.persistence.jdbc.password" value="root" />
 
       <!-- Otras propiedades de Hibernate -->
       <property name="hibernate.show_sql" value="true" />
-      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.hbm2ddl.auto" value="update" />
 
       <!-- Configuración del dialecto de la base de datos -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
 
-<!--      &lt;!&ndash; Muestra por debajo lo que esta pasando &ndash;&gt;-->
-<!--      <property name="hibernate.format_sql" value="true" />-->
-<!--      <property name="hibernate.highlight_sql" value="true" />-->
 
 
     </properties>
