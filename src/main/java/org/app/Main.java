@@ -7,22 +7,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] args) {
 
-        // Crear el EntityManagerFactory usando la unidad de persistencia definida en persistence.xml
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba");
-        // Crear el EntityManager
-        EntityManager em = emf.createEntityManager();
-
-
         // Crear un nuevo cliente, incidente y tecnico
         Cliente cliente = new Cliente();
-        cliente.setRazonSocial("Gonza");
-        cliente.setCuit("2023");
+        cliente.setRazonSocial("Dani");
+        cliente.setCuit("2200");
         cliente.setIncidentes(new HashSet<>());
 
         Incidente incidente = new Incidente();
@@ -34,16 +28,36 @@ public class Main {
         incidente.setTitle("Servicio");
         incidente.setState(Estado.ESTADO_PROCESO);
 
-        Tecnico tecnico = new Tecnico("Fran", "Bara",2025, Noti.EMAIL);
-        tecnico.addIncidentes(incidente);
+        Tecnico tecnico = Tecnico.builder()
+
+                .firstname("Vero")
+                .lastname("Galvi")
+                .dni(2026)
+                .especialidad(Especialidad.SAP)
+                .medio(Noti.WHATSAPP)
+                .build();
+
+        incidente.setTecnico(tecnico);
+//        tecnico.addIncidentes(incidente);
+
+        insert(cliente);
+        insert(incidente);
+        insert(tecnico);
+
+    }
+    public static void insert(Object object){
+
+        // Crear el EntityManagerFactory usando la unidad de persistencia definida en persistence.xml
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba");
+        // Crear el EntityManager
+        EntityManager em = emf.createEntityManager();
 
         try {
             // Iniciar la transacción
             em.getTransaction().begin();
 
             // Persistir el cliente en la base de datos (esto también creará la tabla si no existe)
-            em.persist(cliente);
-            em.persist(incidente);
+            em.persist(object);
 
             // Commit de la transacción
             em.getTransaction().commit();
@@ -56,35 +70,41 @@ public class Main {
             emf.close();
         }
     }
-    public static void menu(){
-        int opc=5;
-        Scanner sc=new Scanner(System.in);
-
-        do{
-
-            System.out.println("Menu");
-            System.out.println("Mesa ayuda");
-            System.out.println("RRHHH");
-            System.out.println("Area administrativa");
-            System.out.println("5-Salir");
-
-            switch (opc){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-
-
-            }
-
-        }while (opc!=5);
-
-    }
-
 }
+
+
+
+
+
+
+//
+//    public static void menu(){
+//        int opc=5;
+//        Scanner sc=new Scanner(System.in);
+//
+//        do{
+//
+//            System.out.println("Menu");
+//            System.out.println("Mesa ayuda");
+//            System.out.println("RRHHH");
+//            System.out.println("Area administrativa");
+//            System.out.println("5-Salir");
+//
+//            switch (opc){
+//                case 1:
+//                    break;
+//                case 2:
+//                    break;
+//                case 3:
+//                    break;
+//                case 4:
+//                    break;
+//                case 5:
+//                    break;
+//
+//
+//            }
+//
+//        }while (opc!=5);
+//
+//    }

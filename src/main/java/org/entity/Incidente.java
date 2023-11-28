@@ -1,14 +1,17 @@
 package org.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+
 
 @Entity
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 public class Incidente {
     @Id
@@ -19,7 +22,6 @@ public class Incidente {
     private LocalDate dateEstimate;
     private LocalDate dateEnd;
     private String consideration;
-//    @Column(name = "estado")
     private Estado state;
     //private int [] complejidad={1,2,3}; // normal media alta
     @ManyToOne(fetch = FetchType.EAGER)
