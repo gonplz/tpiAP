@@ -3,8 +3,8 @@ package org.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 @Entity
 @EqualsAndHashCode
 @Getter
@@ -19,24 +19,50 @@ public class Tecnico {
     private String firstname;
     private String lastname;
     private int dni;
-    private Especialidad especialidad;
+
     private Noti medio;
 
-    @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
+     @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
      private Set<Incidente> problema = new HashSet<>();
 
-    public Tecnico(String firstname,String lastname,int dni,Especialidad especialidad,Noti medio,Set<Incidente>problema) {
+    @Column(columnDefinition = "VARCHAR(255)")
+    @ElementCollection(targetClass = Especialidad.class)
+    @Enumerated(EnumType.STRING)
+    private List<Especialidad> especialidades;
 
+
+    public Tecnico(String firstname,String lastname,int dni,Noti medio) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.dni = dni;
-        this.especialidad = especialidad;
         this.medio = medio;
-        this.problema = problema;
+
     }
 
-    //Metodo add//
-    public void addIncidentes (Incidente incidente) {
-        problema.add(incidente);
+    public void agregarEspecialidad(Especialidad especialidad) {
+        if (especialidades == null) {
+            especialidades = new ArrayList<>();
+        }
+        especialidades.add(especialidad);
     }
+
+    public void mostrasEspecialidades(){
+      if(this.especialidades!=null){
+          this.especialidades.forEach(System.out::println);
+      }
+    }
+
+    public void eliminarEspecialidad(Especialidad especialidad){
+        Objects.requireNonNull(this.especialidades);
+        this.especialidades.removeIf(e->e.equals(especialidad));
+    }
+
+//    public void mostrarIndicidentesAsignados(){
+//        Objects.requireNonNull(this.problema,"No esta inicialiazado");
+//        if(this.problema.size()>0 ){
+//            this.problema.forEach(System.out::println);
+//        }
+//    }
+
+
 }
