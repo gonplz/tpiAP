@@ -5,6 +5,8 @@ import org.repository.State;
 import org.repository.enCurso;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,6 +30,7 @@ public class Incidente {
     @Column(name = "Estado")
     private String estado;
     //private int [] complejidad={1,2,3}; // normal media alta
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -35,6 +38,11 @@ public class Incidente {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
+
+    @Column(columnDefinition = "VARCHAR(255)")
+    @ElementCollection(targetClass = Especialidad.class)
+    @Enumerated(EnumType.STRING)
+    private List<Especialidad> requiereEspecialidades=new ArrayList<>();
 
     public Incidente(String title, LocalDate dateStart, LocalDate dateEstimate, LocalDate dateEnd, String consideration,Cliente cliente, Tecnico tecnico) {
         this.state=new enCurso();

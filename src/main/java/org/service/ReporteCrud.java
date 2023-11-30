@@ -3,6 +3,8 @@ package org.service;
 import org.entity.Reporte;
 import org.repository.CrudRepositorie;
 
+import java.util.List;
+
 public class ReporteCrud implements CrudRepositorie<Reporte> {
 
 
@@ -13,7 +15,7 @@ public class ReporteCrud implements CrudRepositorie<Reporte> {
     public void update(Reporte reporte) {}
 
     @Override
-    public void delate(Reporte reporte) {}
+    public void delete(Reporte reporte) {}
 
     @Override
     public Reporte retrive(int id) {
@@ -21,7 +23,7 @@ public class ReporteCrud implements CrudRepositorie<Reporte> {
     }
 
     @Override
-    public Reporte retriveAll() {
+    public List<Reporte> retriveAll() {
         return null;
     }
 }

@@ -1,13 +1,13 @@
 package org.service;
 
 import org.entity.Cliente;
-import org.entity.Tecnico;
 import org.repository.ClasePersistencia;
 import org.repository.CrudRepositorie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class ClienteService implements CrudRepositorie<Cliente> {
 
@@ -21,6 +21,7 @@ public class ClienteService implements CrudRepositorie<Cliente> {
 
             // Persistir el cliente en la base de datos (esto también creará la tabla si no existe)
             em.persist(cliente);
+
             // Commit de la transacción
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -38,7 +39,7 @@ public class ClienteService implements CrudRepositorie<Cliente> {
     public void update(Cliente cliente) {}
 
     @Override
-    public void delate(Cliente cliente) {}
+    public void delete(Cliente cliente) {}
 
     @Override
     public Cliente retrive(int id) {
@@ -69,7 +70,17 @@ public class ClienteService implements CrudRepositorie<Cliente> {
     }
 
     @Override
-    public Cliente retriveAll() {
-        return null;
+    public List<Cliente> retriveAll() {
+        List clientes;
+        EntityManager em=ClasePersistencia.EntityManejador();
+        try{
+            clientes = em.createNativeQuery("SELECT * FROM cliente", Cliente.class).getResultList();
+
+        } finally {
+            em.close();
+        }
+
+        return clientes;
+
     }
 }

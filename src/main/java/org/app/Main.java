@@ -2,6 +2,7 @@ package org.app;
 
 import org.entity.*;
 import org.repository.ClasePersistencia;
+import org.repository.Inconcluso;
 import org.repository.enCurso;
 import org.service.ClienteService;
 import org.service.IncidenteService;
@@ -19,86 +20,59 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+  ClienteService serviceCliente=new ClienteService();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba");
+//        EntityManager em = emf.createEntityManager();
+
+
+        Cliente gonza=new Cliente();
+        gonza.setCuit("123123");
+        gonza.setRazonSocial("Arcor_SA");
+        gonza.setIncidentes(new HashSet<>());
+        serviceCliente.create(gonza);
+
+        TecnicoService tecnicoService=new TecnicoService();
+        Tecnico tecnico = new Tecnico();
+        tecnico.setFirstname("Diego");
+        tecnico.setLastname("Ginard");
+        tecnico.setDni(92);
+        tecnico.agregarEspecialidad(Especialidad.LINUX);
+        tecnico.agregarEspecialidad(Especialidad.MAC);
+        tecnico.agregarEspecialidad(Especialidad.TANGO);
+        tecnico.setMedio(Noti.WHATSAPP);
+        tecnicoService.create(tecnico);
+
+
+        IncidenteService incidenteService=new IncidenteService();
+        Incidente incidente = new Incidente();
+        incidente.setCliente(gonza);
+        incidente.setDateStart(LocalDate.now());
+        incidente.setDateEstimate(LocalDate.now());
+        incidente.getRequiereEspecialidades().add(Especialidad.TANGO);
+        incidente.setDateEnd(LocalDate.now());
+        incidente.setConsideration("XXXXXXX");
+        incidente.setTitle("Mantenimiento");
+        incidente.setEstado(new Inconcluso());
+        incidente.setTecnico(tecnico);
+        incidenteService.create(incidente);
 
 
 
-        // Crear un nuevo cliente, incidente y tecnico
-//        Cliente cliente = new Cliente();
-//        cliente.setRazonSocial("Francisco");
-//        cliente.setCuit("1034");
-//        cliente.setIncidentes(new HashSet<>());
-//         ClienteService servicioCliente=new ClienteService();
-//       servicioCliente.create(cliente);
-//        Cliente recuperado=servicioCliente.retrive(1);
-
-        TecnicoService service=new TecnicoService();
-        var tecnicoBase=service.retrive(4);
-//        //service.create(tec1);
-//        System.out.println(tecnicoBase);
-//        //Crear un incidente
-//        Incidente incidente = new Incidente();
-//        incidente.setCliente(recuperado);
-//        incidente.setDateStart(LocalDate.now());
-//        incidente.setDateEstimate(LocalDate.now());
-//        incidente.setDateEnd(LocalDate.now());
-//        incidente.setConsideration("XXXXXXX");
-//        incidente.setTitle("Mantenimiento");
-//        incidente.setEstado(new enCurso());
-//       // incidente.setTecnico(tecnicoBase);
-//        System.out.println("-----");
-//        IncidenteService servicioIncidente=new IncidenteService();
-       // servicioIncidente.create(incidente);
-        System.out.println(tecnicoBase);
 
 
 
-
-        // insertar tecnico
-
-//        Tecnico tecnico = new Tecnico();
-//        tecnico.setFirstname("Vero");
-//        tecnico.setLastname("Galvi");
-//        tecnico.setDni(2026);
-//        tecnico.agregarEspecialidad(Especialidad.LINUX);
-//        tecnico.agregarEspecialidad(Especialidad.SAP);
-//        tecnico.setMedio(Noti.WHATSAPP);
-//        tecnico.setProblema(new HashSet<>());
-//        insert(tecnico);
-
-//        Tecnico tecnico = new Tecnico();
-//        tecnico.setFirstname("Diego");
-//        tecnico.setLastname("Ginard");
-//        tecnico.setDni(92);
-//        tecnico.setId(2);
-//        tecnico.agregarEspecialidad(Especialidad.LINUX);
-//        tecnico.agregarEspecialidad(Especialidad.MAC);
-//        tecnico.agregarEspecialidad(Especialidad.TANGO);
-//        tecnico.setMedio(Noti.WHATSAPP);
-
-
-//        TecnicoService serviceTecnico=new TecnicoService();
-//        serviceTecnico.create(tecnico);
-
-//        serviceTecnico.update(tecnico);
-
-         //recuperar tecnico
-//        var valor=buscarTecnico(1);
-//        System.out.println(valor);
-
-        //recuperar tecnico
-//
-//        Incidente incidente = new Incidente();
-//        incidente.setCliente(cliente);
-//        incidente.setDateStart(LocalDate.now());
-//        incidente.setDateEstimate(LocalDate.now());
-//        incidente.setDateEnd(LocalDate.now());
-//        incidente.setConsideration("XXXXXXX");
-//        incidente.setTitle("Mantenimiento");
-//        incidente.setState(Estado.ESTADO_PROCESO);
-//        incidente.setTecnico(tecnico);
 //
 //
-////        tecnico.addIncidentes(incidente);
+//        Cliente diego=new Cliente();
+//        diego.setCuit("11233");
+//        diego.setRazonSocial("asd23");
+//        diego.setIncidentes(new HashSet<>());
+//
+//
+//        serviceCliente.create(diego);
+//        for(Cliente c:serviceCliente.retriveAll()){
+//            System.out.println(c);
+//        }
 
 
 

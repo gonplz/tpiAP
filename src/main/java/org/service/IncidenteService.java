@@ -5,6 +5,7 @@ import org.repository.ClasePersistencia;
 import org.repository.CrudRepositorie;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class IncidenteService implements CrudRepositorie<Incidente> {
 
@@ -34,7 +35,7 @@ public class IncidenteService implements CrudRepositorie<Incidente> {
     public void update(Incidente incidente) {}
 
     @Override
-    public void delate(Incidente incidente) {}
+    public void delete(Incidente incidente) {}
 
     @Override
     public Incidente retrive(int id) {
@@ -42,7 +43,7 @@ public class IncidenteService implements CrudRepositorie<Incidente> {
     }
 
     @Override
-    public Incidente retriveAll() {
+    public List<Incidente> retriveAll() {
         return null;
     }
 }

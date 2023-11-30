@@ -6,13 +6,11 @@ import org.repository.ClasePersistencia;
 import org.repository.TecnicoRepositorie;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.util.List;
+
 @NoArgsConstructor
 public class TecnicoService implements TecnicoRepositorie {
-
-
 
 
     @Override
@@ -59,13 +57,12 @@ public class TecnicoService implements TecnicoRepositorie {
     }
 
     @Override
-    public void delate(Tecnico tecnico) {}
+    public void delete(Tecnico tecnico) {}
 
     @Override
     public Tecnico retrive(int id) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba");
-        EntityManager em = emf.createEntityManager();
+        EntityManager em=ClasePersistencia.EntityManejador();
 
         Tecnico tecnicoRecuperado;
 
@@ -82,7 +79,7 @@ public class TecnicoService implements TecnicoRepositorie {
         } finally {
             // Cerrar el EntityManager y el EntityManagerFactory
             em.close();
-            emf.close();
+
         }
         return tecnicoRecuperado;
 
@@ -94,7 +91,16 @@ public class TecnicoService implements TecnicoRepositorie {
     }
 
     @Override
-    public Tecnico retriveAll() {
+    public List<Tecnico> retriveAll() {
+        String query="Select * from Cliente";
+        EntityManager em=ClasePersistencia.EntityManejador();
+        try{
+           em.createQuery("SELECT * FROM Tecnico").getResultList();
+
+        } finally {
+            em.close();
+        }
+
         return null;
     }
 
