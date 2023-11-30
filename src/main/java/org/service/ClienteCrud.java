@@ -17,9 +17,9 @@ public class ClienteCrud implements CrudRepositorie<Cliente> {
     public void create(Cliente cliente) {
         EntityManager em = emf.createEntityManager();
         try {
-            em.getTransaction().begin();
+            em.getTransaction().begin();// cambiar
             em.persist(cliente);
-            em.getTransaction().commit();
+            em.getTransaction().commit();//cambiar
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
