@@ -7,6 +7,6 @@ public interface CrudRepositorie<T> {
         void create(T t);
         void update(T t);
         void delete(T t);
-        T retrive(int id);
-        List<T> retriveAll();
+        T find(int id);
+        List<T> findAll();
 }

@@ -1,86 +1,141 @@
 package org.service;
 
 import org.entity.Cliente;
+import org.entity.Especialidad;
 import org.repository.ClasePersistencia;
 import org.repository.CrudRepositorie;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.List;
+import java.util.Objects;
 
-public class ClienteService implements CrudRepositorie<Cliente> {
+public class ClienteService implements CrudRepositorie<Cliente>,AutoCloseable {
 
+    private EntityManager em;
+
+
+    public ClienteService() {
+        this.em =ClasePersistencia.EntityManejador();
+    }
 
     @Override
     public void create(Cliente cliente) {
-        EntityManager em= ClasePersistencia.EntityManejador();
+        //EntityManager em= ClasePersistencia.EntityManejador();
         try{
-            // Iniciar la transacción
             em.getTransaction().begin();
-
-            // Persistir el cliente en la base de datos (esto también creará la tabla si no existe)
             em.persist(cliente);
-
-            // Commit de la transacción
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-        }finally {
-            em.close();
         }
 
 
     }
 
     @Override
-    public void update(Cliente cliente) {}
+    public void update(Cliente cliente) {
+
+        try{
+            em.getTransaction().begin();
+            em.merge(cliente);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        }
+
+
+    }
 
     @Override
-    public void delete(Cliente cliente) {}
+    public void delete(Cliente cliente) {
+        try{
+            Objects.requireNonNull(cliente);
+            if(cliente.getId()>0){
+                em.getTransaction().begin();
+                em.remove(cliente);
+                em.getTransaction().commit();
+            }
+        }catch (Exception e){
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
-    public Cliente retrive(int id) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba");
-        EntityManager em = emf.createEntityManager();
-
-       Cliente  clienteRecuperdado;
-
+    public Cliente find(int id) {
+       // EntityManager em= ClasePersistencia.EntityManejador();
+        Cliente clienteRecuperdado=null;
         try {
-            // Utilizar el método find para buscar y recuperar un técnico por su ID
             clienteRecuperdado = em.find(Cliente.class,id);
 
-            // Verificar si el técnico fue encontrado
             if ( clienteRecuperdado != null) {
-                System.out.println("Técnico recuperado: " +  clienteRecuperdado);
+                System.out.println("Cliente recuperado: " +  clienteRecuperdado);
             } else {
-                System.out.println("Técnico no encontrado con el ID: " +id);
+                System.out.println("Cliente no encontrado con el ID: " +id);
             }
-        } finally {
-            // Cerrar el EntityManager y el EntityManagerFactory
-            em.close();
-            emf.close();
+        } catch (Exception e){
+            e.printStackTrace();
+
         }
         return clienteRecuperdado;
 
 
 
     }
+    public Cliente findByCUIT(String  CUIT){
+        Cliente cliente=null;
+        try {
+            // inseguro posible inyeccion sql
+            //  obj= em.createQuery("SELECT c FROM Cliente c WHERE c.cuit="+CUIT).getSingleResult();
+            Query query=em.createQuery("SELECT c FROM Cliente c WHERE c.cuit = :cuit");
+            query.setParameter("cuit",CUIT);
+            cliente=(Cliente) query.getSingleResult();
+
+        }catch (NoResultException e){
+            System.out.println("Cliente no encontrado con el Dni: " +CUIT);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return cliente;
+
+    }
 
     @Override
-    public List<Cliente> retriveAll() {
-        List clientes;
-        EntityManager em=ClasePersistencia.EntityManejador();
+    public List<Cliente> findAll() {
+        List<Cliente>listaClientes=null;
         try{
-            clientes = em.createNativeQuery("SELECT * FROM cliente", Cliente.class).getResultList();
+            listaClientes = em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return listaClientes;
 
-        } finally {
+
+    }
+
+    public void cargarServicios(List<Especialidad>listaEspecialidades,Cliente cliente){
+        cliente.getServiciosContratados().clear();
+        cliente.getServiciosContratados().addAll(listaEspecialidades);
+
+    }
+
+    /*AutoClosable la interfaz permite el cerrado automatico de recursos
+    * */
+    @Override
+    public void close() throws Exception {
+        if(em!=null && em.isOpen()){
             em.close();
         }
-
-        return clientes;
-
     }
 }

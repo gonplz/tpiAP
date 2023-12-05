@@ -1,5 +1,5 @@
 package org.entity;
 
-public enum Noti {
+public enum Notificacion {
     EMAIL, WHATSAPP;
 }

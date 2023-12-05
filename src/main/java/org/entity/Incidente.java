@@ -1,8 +1,8 @@
 package org.entity;
 
 import lombok.*;
+import org.repository.Inconcluso;
 import org.repository.State;
-import org.repository.enCurso;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import java.util.List;
 @EqualsAndHashCode
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
+@ToString(exclude = {"cliente","state","reporte_tecnicos"})
+
 public class Incidente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,10 @@ public class Incidente {
 
     @Column(name = "Estado")
     private String estado;
-    //private int [] complejidad={1,2,3}; // normal media alta
+    @Transient
+    private int [] complejidad={1,2,3}; // normal media alta
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
@@ -40,26 +41,28 @@ public class Incidente {
     private Tecnico tecnico;
 
     @Column(columnDefinition = "VARCHAR(255)")
-    @ElementCollection(targetClass = Especialidad.class)
+    @ElementCollection(targetClass = Especialidad.class,fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Especialidad> requiereEspecialidades=new ArrayList<>();
 
-    public Incidente(String title, LocalDate dateStart, LocalDate dateEstimate, LocalDate dateEnd, String consideration,Cliente cliente, Tecnico tecnico) {
-        this.state=new enCurso();
+    @ManyToMany(mappedBy = "reporte_incidentes")
+    private List<Tecnico> reporte_tecnicos= new ArrayList<>();
+    public Incidente() {
+        this.state=new Inconcluso();
         setEstado(this.state);
-        this.title = title;
-        this.dateStart = dateStart;
-        this.dateEstimate = dateEstimate;
-        this.dateEnd = dateEnd;
-        this.consideration = consideration;
-        this.estado = estado;
-        this.cliente = cliente;
-        this.tecnico = tecnico;
+
     }
 
     public void setEstado(State state){
-
         this.estado=state.cambiarIncidente();
+
     }
+
+//    public void setCliente(Cliente cliente) {
+//        this.cliente = cliente;
+//        if (cliente != null && !cliente.getIncidentes().contains(this)) {
+//            cliente.getIncidentes().add(this);
+//        }
+//    }
 
 }

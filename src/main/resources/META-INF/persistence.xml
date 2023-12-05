@@ -16,10 +16,10 @@
 
       <!-- Otras propiedades de Hibernate -->
       <property name="hibernate.show_sql" value="true" />
-      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
 
       <!-- Configuración del dialecto de la base de datos -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
 
 
